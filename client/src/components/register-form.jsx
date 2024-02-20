@@ -12,30 +12,34 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { loginToUser } from "@/requests/requests";
+import { createUser, loginToUser } from "@/requests/requests";
 import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [loading, setloading] = useState(false);
   const [error, setError] = useState(false);
   const form = useForm();
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     setError(false);
-    if (!data?.username || !data?.password) {
+    if (!data?.username || !data?.password || !data?.email) {
       return setError("Please enter username and password");
     }
-    if (data?.username.trim() == "" || data?.password.trim() == "") {
-      return setError("Please enter username and password");
+    if (
+      data?.username.trim() == "" ||
+      data?.password.trim() == "" ||
+      data?.email.trim() == ""
+    ) {
+      return setError("Please enter username, password and email");
     }
-
     setloading(true);
-    const response = await loginToUser(data);
+    const response = await createUser(data);
     if (response) {
-      setCookie("token", response?.token);
-      window.location.reload();
+      router.push("/login");
     } else {
-      setError("Credentials Provided are not correct");
+      setError("You Did it Wrong Please Try Again");
     }
     setloading(false);
   };
@@ -53,6 +57,26 @@ export default function LoginForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-2 w-full"
         >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <>
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="Enter your Email..."
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </>
+            )}
+          />
           <FormField
             control={form.control}
             name="username"
@@ -73,6 +97,7 @@ export default function LoginForm() {
               </>
             )}
           />
+
           <FormField
             control={form.control}
             name="password"

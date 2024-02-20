@@ -1,14 +1,32 @@
+"use client";
+import { useChat } from "@/context/chat-context";
 import { ChatView } from "./chat-view";
 import { InitialScreen } from "./initial-screen";
+import { Loader } from "./loader";
 
 export const MainChatBox = () => {
+  const { chats, loading } = useChat();
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
-      <div className="container flex flex-col px-64 pt-12 ">
-        <ChatView isBot={false} chat={"How to get Alot of Moeny"} />
-        <ChatView isBot={true} chat={"How to get Alot of Moeny"} />
-      </div>
-      {/* <InitialScreen /> */}
+      {chats && chats.length == 0 ? (
+        <InitialScreen />
+      ) : (
+        <div className="container flex flex-col px-32 lg:px-64 pt-12 ">
+          {chats &&
+            chats.map((item, idx) => {
+              return (
+                <ChatView
+                  key={idx}
+                  isBot={item.type == "bot" ? true : false}
+                  chat={item.value}
+                />
+              );
+            })}
+        </div>
+      )}
     </>
   );
 };

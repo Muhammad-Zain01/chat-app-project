@@ -4,15 +4,20 @@ import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/context/user-context";
 
 export const AccountInformation = () => {
+  const { user } = useUser();
+  const router = useRouter();
+  const userLogout = async () => {
+    deleteCookie("token");
+    router.push("/login");
+  };
   return (
     <div>
       <div className="p-2">
@@ -24,15 +29,20 @@ export const AccountInformation = () => {
             >
               <div className="flex items-center my-6~">
                 <div className="rounded-full bg-gray-500 w-[20px] h-[20px] text-white flex items-center justify-center p-4">
-                  Z
+                  {user[0]?.username[0].toUpperCase()}
                 </div>
-                <div className="ml-2">zain memon</div>
+                <div className="flex flex-col items-start">
+                  <div className="ml-2">{user[0]?.username}</div>
+                  <div className="ml-2 text-xs text-gray-400">
+                    {user[0]?.email}
+                  </div>
+                </div>
               </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuItem>
-              <div className="flex items-center">
+              <div className="flex items-center" onClick={userLogout}>
                 <LogOut className="mr-2" size={17} />
                 Log out
               </div>

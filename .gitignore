@@ -7,29 +7,32 @@
 .yarn/install-state.gz
 
 # testing
-/coverage
+client/coverage
 
 # next.js
-/.next/
-/out/
+client/.next/
+client/out/
+client/node_modules/
 
 # production
-/build
-
+client/build
+env
+__pycache__
+migrations
 # misc
-.DS_Store
+client/.DS_Store
 *.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
 
 # local env files
-.env*.local
+client/.env*.local
 
 # vercel
-.vercel
+client/.vercel
 
 # typescript
 *.tsbuildinfo
