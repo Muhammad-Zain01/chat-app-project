@@ -124,7 +124,7 @@ export default function RegisterForm() {
               className="ml-auto mt-6 w-full"
               type="submit"
             >
-              Login
+              Register
             </Button>
           </div>
         </form>
