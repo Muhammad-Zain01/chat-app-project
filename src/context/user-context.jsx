@@ -1,6 +1,6 @@
 "use client";
 import { verifyUser } from "@/requests/requests";
-import { getCookie } from "cookies-next";
+import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
   const get = async () => {
     const response = await verifyUser();
     if (!response) {
-      getCookie("token");
+      deleteCookie("token");
       router.push("/login");
     }
     setUser(response);

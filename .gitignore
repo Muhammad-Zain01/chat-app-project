@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.js
 .yarn/install-state.gz
 
@@ -15,25 +15,26 @@ client/out/
 client/node_modules/
 
 # production
-client/build
+build
+.next
 env
-__pycache__
-migrations
+
 # misc
-client/.DS_Store
+.DS_Store
 *.pem
 
 # debug
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # local env files
-client/.env*.local
+.env*.local
 
 # vercel
-client/.vercel
+.vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+yarn.lock
