@@ -14,8 +14,48 @@ A modern web browser
 
 #### Setup Instructions
 
-Clone the Repository
+##### Clone the Repository
+
 ```
-    git clone https://your-repository-url.git
-    cd chatgpt-clone
+    git clone https://github.com/Muhammad-Zain01/chat-app-project
 ```
+
+Clone the Backend the Repository ( For Backend Setup, [see](https://github.com/Muhammad-Zain01/chat-app-project-backend))
+```
+    git clone https://github.com/Muhammad-Zain01/chat-app-project-backend
+```
+
+##### Install Dependencies
+
+```
+    npm install
+```
+or 
+
+
+```
+    yarn
+```
+
+##### Environment Configuration
+
+Create a .env file in the root directory of your project and populate it with the necessary environment variables. Here's an example of what your .env file should look like
+
+```
+    BACKEND_URL="http://127.0.0.1:8000"
+```
+
+##### Run the Development Server
+
+
+```
+    npm run dev
+```
+or 
+
+
+```
+    yarn dev
+```
+
+This will start the development server on [http://localhost:3000](http://localhost:3000). Navigate to this URL in your browser to interact with the application.
